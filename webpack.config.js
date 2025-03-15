@@ -1,11 +1,19 @@
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const webpack = require('webpack');
+console.log("Custom webpack config loaded");
 
 module.exports = {
   resolve: {
     fallback: {
+      "path": require.resolve("path-browserify"),
       "worker_threads": false,
-      "path": require.resolve("path-browserify")
-    }
+    },
   },
-  plugins: [new NodePolyfillPlugin()]
+  plugins: [
+    new webpack.IgnorePlugin({
+      resourceRegExp: /closewords/,
+    }),
+    new webpack.ProvidePlugin({
+        process: 'process/browser',  // Provide process for older code that uses it
+      }),
+  ],
 };
