@@ -25,6 +25,9 @@
       <mat-card class="sub-card" *ngFor="let item of paragraphs; let i = index" cdkDrag>
         <mat-card-content>
           <p>{{item}}</p>
+          <button mat-icon-button color="warn" (click)="deleteParagraph(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </mat-card-content>
       </mat-card>
     </div>

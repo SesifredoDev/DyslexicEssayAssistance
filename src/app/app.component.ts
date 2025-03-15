@@ -80,6 +80,10 @@ export class AppComponent {
     moveItemInArray(this.paragraphs, event.previousIndex, event.currentIndex);
   }
 
+  deleteParagraph(index: number) {
+    this.paragraphs.splice(index, 1);  // Remove the paragraph at the given index
+  }
+
   exportToTxt() {
     const blob = new Blob([this.paragraphs.join("\n\n")], { type: 'text/plain' });
     const anchor = document.createElement('a');
