@@ -24,12 +24,7 @@
     <div cdkDropList (cdkDropListDropped)="drop($event)">
       <mat-card class="sub-card" *ngFor="let item of paragraphs; let i = index" cdkDrag>
         <mat-card-content>
-<<<<<<< HEAD
-          <p>{{item}}</p>
-=======
           <p>{{ item }}</p>
-          <!-- Add Delete Button -->
->>>>>>> bdf79925a1c768980907c0230b2d276cac5d96cf
           <button mat-icon-button color="warn" (click)="deleteParagraph(i)">
             <mat-icon>delete</mat-icon>
           </button>
