@@ -11,11 +11,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "ngx-build-plus:browser",
           "options": {
             "outputPath": "dist/dyslexic-essay-assistance",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",  
+            "extraWebpackConfig": "./webpack.config.js",
             "polyfills": [
               "zone.js"
             ],
@@ -30,12 +31,7 @@
               "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
