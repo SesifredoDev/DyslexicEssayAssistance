@@ -24,7 +24,7 @@
     <div cdkDropList (cdkDropListDropped)="drop($event)">
       <mat-card class="sub-card" *ngFor="let item of paragraphs; let i = index" cdkDrag>
         <mat-card-content>
-          <p>{{item}}</p>
+          <p>{{ item }}</p>
           <button mat-icon-button color="warn" (click)="deleteParagraph(i)">
             <mat-icon>delete</mat-icon>
           </button>
@@ -32,8 +32,7 @@
       </mat-card>
     </div>
   </div>
-</div>
-
+  
 <!-- Floating Export Button -->
 <button mat-fab color="primary" class="export-btn" (click)="exportToTxt()">
   <mat-icon>download</mat-icon>

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --force",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:DyslexicEssayAssistance": "node dist/dyslexic-essay-assistance/server/server.mjs"
