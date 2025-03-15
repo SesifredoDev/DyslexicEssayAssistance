@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
+import { ChoicePopupComponent } from './pages/choice-popup/choice-popup.component';
 
 @Component({
   selector: 'app-root',
@@ -72,8 +73,13 @@ export class AppComponent {
 
   submit(event: any) {
     if (event === "") return;
-    this.paragraphs.push(event);
-    this.currentInput = "";
+    const dialogRef = this.dialog.open(ChoicePopupComponent, { data: { input: event } });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.paragraphs.push(result);
+        this.currentInput = "";
+      }
+    });
   }
   
   deleteParagraph(index: number) {
