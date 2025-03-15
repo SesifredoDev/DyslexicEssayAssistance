@@ -1,0 +1,11 @@
+<mat-dialog-content *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </mat-dialog-content>
+  <mat-dialog-content *ngIf="!loading">
+    <h2>Select a choice:</h2>
+    <mat-card *ngFor="let choice of choices" (click)="selectChoice(choice)" class="choice-item">
+        <mat-card-content>
+            <p>{{ choice }}</p>
+        </mat-card-content>
+    </mat-card>
+  </mat-dialog-content>

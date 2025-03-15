@@ -1,0 +1,33 @@
+.container{  
+    margin: auto;
+      width: min-content;
+}
+.main-card{
+    width: 80vw;
+    margin: 10px;
+    padding-left: 5%;
+    display: block;
+}
+.main-card .full-width{
+    width: 90%;
+
+}
+.sub-card{
+    margin-top: 10px;
+    cursor: grab;
+    width: 70vw;
+}
+
+.export-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .input-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }

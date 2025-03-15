@@ -1,0 +1,37 @@
+<div class="container">
+  <mat-card class="main-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Enter a new Paragraph</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label></mat-label>
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+          placeholder="Ex. It makes me feel..." [(ngModel)]="currentInput"></textarea>
+      </mat-form-field>
+      <div class="input-buttons">
+        <button mat-icon-button color="primary" (click)="toggleSpeechRecognition()">
+          <mat-icon>{{ isListening ? 'mic_off' : 'mic' }}</mat-icon>
+        </button>
+        <button mat-fab color="accent" (click)="submit(currentInput)">
+          <mat-icon>publish</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="container">
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+      <mat-card class="sub-card" *ngFor="let item of paragraphs; let i = index" cdkDrag>
+        <mat-card-content>
+          <p>{{item}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Export Button -->
+<button mat-fab color="primary" class="export-btn" (click)="exportToTxt()">
+  <mat-icon>download</mat-icon>
+</button>
