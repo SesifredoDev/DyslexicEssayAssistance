@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-      {
-        "source": "/DyslexiaAssistance/(.*)",
-        "destination": "https://dyslexic-essay-assistance.vercel.app/"
-      }
-    ]
-  }

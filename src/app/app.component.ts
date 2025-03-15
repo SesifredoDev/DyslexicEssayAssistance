@@ -1,11 +1,12 @@
 import { Component, NgZone } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
+import { ChoicePopupComponent } from './pages/choice-popup/choice-popup.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
@@ -13,11 +14,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    MatCardModule, MatChipsModule, NgFor, 
-    MatInputModule, MatButtonModule, MatIconModule, 
-    DragDropModule, FormsModule 
-  ],
+  imports: [MatCardModule, MatChipsModule, NgFor, MatInputModule, MatButtonModule, MatIconModule, DragDropModule, FormsModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -29,33 +26,32 @@ export class AppComponent {
   isListening = false;
 
   constructor(private dialog: MatDialog, private ngZone: NgZone) {
-    // Check if window and SpeechRecognition are available
     if (typeof window !== 'undefined') {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       
-      if (SpeechRecognition) {
-        this.recognition = new SpeechRecognition();
-        this.recognition.continuous = true;
-        this.recognition.interimResults = true;
-        this.recognition.lang = 'en-GB';
+    if (SpeechRecognition) {
+      this.recognition = new SpeechRecognition();
+      this.recognition.continuous = true;
+      this.recognition.interimResults = true;
+      this.recognition.lang = 'en-US';
 
-        this.recognition.onresult = (event: any) => {
-          let transcript = "";
-          for (let i = event.resultIndex; i < event.results.length; i++) {
-            transcript += event.results[i][0].transcript;
-          }
-          this.ngZone.run(() => {
-            this.currentInput = transcript;
-          });
-        };
+      this.recognition.onresult = (event: any) => {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        this.ngZone.run(() => {
+          this.currentInput = transcript;
+        });
+      };
 
-        this.recognition.onend = () => {
-          this.ngZone.run(() => {
-            this.isListening = false;
-          });
-        };
-      }
+      this.recognition.onend = () => {
+        this.ngZone.run(() => {
+          this.isListening = false;
+        });
+      };
     }
+  }
   }
 
   toggleSpeechRecognition() {
@@ -72,8 +68,13 @@ export class AppComponent {
 
   submit(event: any) {
     if (event === "") return;
-    this.paragraphs.push(event);
-    this.currentInput = "";
+    const dialogRef = this.dialog.open(ChoicePopupComponent, { data: { input: event } });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.paragraphs.push(result);
+        this.currentInput = "";
+      }
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {
