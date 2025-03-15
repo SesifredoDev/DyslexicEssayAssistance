@@ -44,5 +44,8 @@
     "ngx-build-plus": "^19.0.0",
     "node-polyfill-webpack-plugin": "^4.1.0",
     "typescript": "~5.7.2"
+  },
+  "engines": {
+    "node": "22.14.0"
   }
 }
