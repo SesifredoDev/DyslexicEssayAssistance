@@ -75,6 +75,10 @@ export class AppComponent {
     this.paragraphs.push(event);
     this.currentInput = "";
   }
+  
+  deleteParagraph(index: number) {
+    this.paragraphs.splice(index, 1);  // Remove the paragraph at the given index
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.paragraphs, event.previousIndex, event.currentIndex);
